@@ -7,6 +7,6 @@ test('VRT(ビジュアルリグレッションテスト)', async ({ page }) => {
 
   // 画面全体のスクリーンショットを撮影し、過去の正解画像と比較する
   await expect(page).toHaveScreenshot('top-page.png', {
-    maxDiffPixelRatio: 0.01, // 1%未満の微小なピクセル変化は許容する設定（ノイズ対策）
+    maxDiffPixelRatio: 0.001, // 0.1%未満の微小なピクセル変化は許容する設定（ノイズ対策）
   });
 });
