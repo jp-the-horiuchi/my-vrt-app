@@ -1,0 +1,43 @@
+name: Update VRT Snapshots
+
+on:
+  # 💡 GitHubのActionsタブから、手動でボタンを押して実行できるトリガー
+  workflow_dispatch:
+
+jobs:
+  update-snapshots:
+    runs-on: ubuntu-latest
+    permissions:
+      # 💡 CI（ボット）がリポジトリに画像をPushするための権限
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20 # ※プロジェクトのNodeバージョンに合わせてください
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Update VRT snapshots
+        # 💡 ここで CI(Linux) 上で正解画像を上書き生成する
+        run: npx playwright test --update-snapshots
+
+      - name: Commit and Push changes
+        # 💡 生成された画像をGitに追加し、ボットとしてPushする
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+
+          # 差分（新しく作られた画像）がある場合のみコミットしてPushする
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: update VRT snapshots by CI" && git push)
