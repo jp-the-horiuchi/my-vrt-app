@@ -7,6 +7,8 @@ await page.goto('http://localhost:5173/');
 
   await expect(page).toHaveScreenshot('top-page.png', {
 
+    threshold: 0,
+
     ignoreAntialiasing: false,
 
     maxDiffPixelRatio: 0.001,
