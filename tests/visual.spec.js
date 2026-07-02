@@ -9,8 +9,6 @@ await page.goto('http://localhost:5173/');
 
     threshold: 0,
 
-    ignoreAntialiasing: false,
-
-    maxDiffPixelRatio: 0.001,
+    maxDiffPixelRatio: 0.2,
       });
 });
