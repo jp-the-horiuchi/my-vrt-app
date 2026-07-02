@@ -17,3 +17,13 @@ test('get started link', async ({ page }) => {
   // Expects page to have a heading with the name of Installation.
   await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
 });
+
+test('【従来のテスト】ボタンがDOM上に存在するかチェック', async ({ page }) => {
+  await page.goto('http://localhost:5173/');
+
+  // 画面上にボタンタグが存在するかを取得
+  const button = page.getByRole('button');
+
+  // HTMLの構造としてボタンが存在し、見えている状態かをテスト（CSSで巨大化していても合格する）
+  await expect(button).toBeVisible();
+});
