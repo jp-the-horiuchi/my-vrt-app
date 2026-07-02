@@ -27,6 +27,12 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps chromium
 
+      # 【重要】ここでLinuxサーバーに日本語フォントを入れてレイアウト崩れを防ぐ
+      - name: Install Japanese Fonts
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-noto-cjk
+
       # テストを実行（webServer設定のおかげで自動でReactが裏で起動します）
       - name: Run Playwright tests
         run: npx playwright test
