@@ -21,7 +21,7 @@ jobs:
           cache: "npm"
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       # Playwrightのブラウザ（Chromium）と、Linux環境に必要な依存ライブラリをインストール
       - name: Install Playwright Browsers
