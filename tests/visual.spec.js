@@ -1,7 +1,7 @@
 // tests/visual.spec.js
 import { test, expect } from '@playwright/test';
 
-test('トップページのビジュアルリグレッションテスト', async ({ page }) => {
+test('VRT(ビジュアルリグレッションテスト)', async ({ page }) => {
   // webServerで起動したReactアプリのトップページへ移動
   await page.goto('http://localhost:5173/');
 
