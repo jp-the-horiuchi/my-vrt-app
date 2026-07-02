@@ -1,13 +1,134 @@
+:root {
+  --text: #6b6375;
+  --text-h: #08060d;
+  --bg: #fff;
+  --border: #e5e4e7;
+  --code-bg: #f4f3ec;
+  --accent: #aa3bff;
+  --accent-bg: rgba(170, 59, 255, 0.1);
+  --accent-border: rgba(170, 59, 255, 0.5);
+  --social-bg: rgba(244, 243, 236, 0.5);
+  --shadow:
+    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+
+  /* 💡 OS標準フォントを完全に排除し、Interに統一 */
+  --sans: 'Inter', sans-serif;
+  --heading: 'Inter', sans-serif;
+  --mono: 'Inter', sans-serif;
+
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.18px;
+  color-scheme: light dark;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #9ca3af;
+    --text-h: #f3f4f6;
+    --bg: #16171d;
+    --border: #2e303a;
+    --code-bg: #1f2028;
+    --accent: #c084fc;
+    --accent-bg: rgba(192, 132, 252, 0.15);
+    --accent-border: rgba(192, 132, 252, 0.5);
+    --social-bg: rgba(47, 48, 58, 0.5);
+    --shadow:
+      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+  }
+
+  #social .button-icon {
+    filter: invert(1) brightness(2);
+  }
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+#root {
+  width: 1126px;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  border-inline: 1px solid var(--border);
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+/* 💡 テキストの幅ブレによる自動改行・縦伸びを完全に防止 */
+h1,
+h2,
+p {
+  font-family: var(--heading);
+  color: var(--text-h);
+  white-space: nowrap; 
+}
+
+h1 {
+  font-weight: 500;
+  font-size: 56px;
+  letter-spacing: -1.68px;
+  margin: 32px 0;
+  @media (max-width: 1024px) {
+    font-size: 36px;
+    margin: 20px 0;
+  }
+}
+h2 {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 118%;
+  letter-spacing: -0.24px;
+  margin: 0 0 8px;
+  @media (max-width: 1024px) {
+    font-size: 20px;
+  }
+}
+
+code {
+  font-family: var(--mono);
+  display: inline-flex;
+  border-radius: 4px;
+  color: var(--text-h);
+  font-size: 15px;
+  line-height: 135%;
+  padding: 4px 8px;
+  background: var(--code-bg);
+}
+
+/* 💡 中央のカウントボタン：縦横サイズ・余白・境界線を100%完全固定 */
 .counter {
+  font-family: var(--mono);
+  display: inline-flex;
   font-size: 16px;
-  padding: 5px 10px;
   border-radius: 5px;
   color: var(--accent);
   background: var(--accent-bg);
   border: 2px solid transparent;
   transition: border-color 0.3s;
   margin-bottom: 24px;
-  border-radius: 20px;
+  cursor: pointer;
+
+  /* 固定化設定 */
+  width: 160px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0;
 
   &:hover {
     border-color: var(--accent-border);
@@ -116,17 +237,24 @@
     height: 18px;
   }
 
+  /* 💡 下部のナビリンクボタン：流動的な flex からサイズ固定の inline-flex へ変更 */
   a {
     color: var(--text-h);
     font-size: 16px;
-    border-radius: 20px;
+    border-radius: 6px;
     background: var(--social-bg);
-    display: flex;
-    padding: 6px 12px;
-    align-items: center;
-    gap: 8px;
+    display: inline-flex; 
     text-decoration: none;
     transition: box-shadow 0.3s;
+
+    /* 固定化設定 */
+    width: 160px;
+    height: 38px;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0;
+    gap: 8px;
 
     &:hover {
       box-shadow: var(--shadow);
@@ -134,8 +262,6 @@
     .button-icon {
       height: 18px;
       width: 18px;
-      /* border: 2px solid transparent;
-      border-radius: 10px; */
     }
   }
 
